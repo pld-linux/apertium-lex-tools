@@ -2,24 +2,23 @@ Summary:	Constraint-based lexical selection module
 Summary(pl.UTF-8):	Moduł selekcji leksykalnej opartej na ograniczeniach
 Name:		apertium-lex-tools
 Version:	0.1.0
-%define	snap	20130521
-Release:	0.%{snap}.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Text
-# svn co http://apertium.svn.sourceforge.net/svnroot/apertium/trunk/apertium-lex-tools
-Source0:	%{name}-r44914.tar.xz
-# Source0-md5:	fb312984f9af2bf4c70db947a9bb0cc6
+Source0:	http://downloads.sourceforge.net/apertium/%{name}-%{version}.tar.gz
+# Source0-md5:	99ffa9e089cb899b532abc38a6da2eab
+Patch0:		%{name}-versions.patch
 URL:		http://apertium.sourceforge.net/
-BuildRequires:	apertium-devel >= 3.2.0
+BuildRequires:	apertium-devel >= 3.3.0
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	libxml2-devel >= 1:2.6.17
-BuildRequires:	lttoolbox-devel >= 3.2.0-2.svn20130412
+BuildRequires:	lttoolbox-devel >= 3.3.0
 BuildRequires:	pkgconfig
-Requires:	apertium >= 3.2.0
+Requires:	apertium >= 3.3.0
 Requires:	libxml2 >= 1:2.6.17
-Requires:	lttoolbox >= 3.2.0-2.svn20130412
+Requires:	lttoolbox >= 3.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,7 +28,8 @@ Constraint-based lexical selection module.
 Moduł selekcji leksykalnej opartej na ograniczeniach.
 
 %prep
-%setup -q -n %{name}
+%setup -q
+%patch0 -p1
 
 %build
 %{__aclocal}
@@ -53,3 +53,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS README README.yasmet TODO
 %attr(755,root,root) %{_bindir}/lrx-comp
 %attr(755,root,root) %{_bindir}/lrx-proc
+%attr(755,root,root) %{_bindir}/multitrans
