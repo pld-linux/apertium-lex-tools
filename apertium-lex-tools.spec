@@ -7,7 +7,6 @@ License:	GPL v2+
 Group:		Applications/Text
 Source0:	http://downloads.sourceforge.net/apertium/%{name}-%{version}.tar.gz
 # Source0-md5:	7b13266bb29fcbc61a73c4e74d047cfa
-Patch0:		%{name}-versions.patch
 URL:		http://apertium.sourceforge.net/
 BuildRequires:	apertium-devel >= 3.3.0
 BuildRequires:	autoconf >= 2.61
@@ -29,7 +28,6 @@ Moduł selekcji leksykalnej opartej na ograniczeniach.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__aclocal}
