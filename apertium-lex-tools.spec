@@ -1,12 +1,12 @@
 Summary:	Constraint-based lexical selection module
 Summary(pl.UTF-8):	Moduł selekcji leksykalnej opartej na ograniczeniach
 Name:		apertium-lex-tools
-Version:	0.1.0
+Version:	0.2.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Text
 Source0:	http://downloads.sourceforge.net/apertium/%{name}-%{version}.tar.gz
-# Source0-md5:	99ffa9e089cb899b532abc38a6da2eab
+# Source0-md5:	7b13266bb29fcbc61a73c4e74d047cfa
 Patch0:		%{name}-versions.patch
 URL:		http://apertium.sourceforge.net/
 BuildRequires:	apertium-devel >= 3.3.0
