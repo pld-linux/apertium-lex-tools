@@ -1,12 +1,15 @@
+#
+# TODO: deval and static subpackages?
+#
 Summary:	Constraint-based lexical selection module
 Summary(pl.UTF-8):	Moduł selekcji leksykalnej opartej na ograniczeniach
 Name:		apertium-lex-tools
-Version:	0.2.1
-Release:	4
+Version:	0.5.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Text
-Source0:	http://downloads.sourceforge.net/apertium/%{name}-%{version}.tar.gz
-# Source0-md5:	7b13266bb29fcbc61a73c4e74d047cfa
+Source0:	https://github.com/apertium/apertium-lex-tools/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	c37d536c2ac823b50f660b83382625d1
 URL:		http://apertium.sourceforge.net/
 BuildRequires:	apertium-devel >= 3.3.0
 BuildRequires:	autoconf >= 2.61
@@ -29,10 +32,13 @@ Moduł selekcji leksykalnej opartej na ograniczeniach.
 %prep
 %setup -q
 
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
+      src/validate-lrx.sh
+
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
-%{__autoheader}
 %{__automake}
 %configure
 %{__make}
@@ -43,6 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libapertium-lex-tools.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -52,3 +60,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lrx-comp
 %attr(755,root,root) %{_bindir}/lrx-proc
 %attr(755,root,root) %{_bindir}/multitrans
+%attr(755,root,root) %{_bindir}/apertium-validate-lrx
+%attr(755,root,root) %{_bindir}/process-tagger-output
+%ghost %{_libdir}/libapertium-lex-tools.so.1
+%{_libdir}/libapertium-lex-tools.so.*.*.*
+%{_datadir}/apertium-lex-tools/*.py
+%{_datadir}/apertium-lex-tools/lrx.dtd
+
+#%{_libdir}/libapertium-lex-tools.so
+#%{_includedir}/apertium-lex-tools
+#%{_pkgconfigdir}/apertium-lex-tools.pc
+#%{_libdir}/libapertium-lex-tools.a
